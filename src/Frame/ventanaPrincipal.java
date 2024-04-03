@@ -1,12 +1,16 @@
 
 package Frame;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 
 public class ventanaPrincipal extends javax.swing.JFrame {
 
     public ventanaPrincipal() {
         initComponents();
         botonesV.initEvent(ventanaPrincipal.this);
+
     }
     
     
@@ -19,7 +23,6 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         panelRedondo2 = new Componentes_Programa.panelRedondo();
         botonesV = new Componentes_Programa.botonesVentana();
         panelRedondo1 = new Componentes_Programa.panelRedondo();
-        jEImagePanel3 = new LIB.JEImagePanel();
         jLabel4 = new javax.swing.JLabel();
         jEImagePanel4 = new LIB.JEImagePanel();
         jLabel5 = new javax.swing.JLabel();
@@ -28,12 +31,13 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         botonPrincipal1 = new Componentes_Programa.botonPrincipal();
+        jEImagePanel2 = new LIB.JEImagePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
-        jEImagePanel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos_Imagenes/macOS-Monterey-wallpaper-Light.jpg"))); // NOI18N
+        jEImagePanel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/macOS-Monterey-wallpaper-Light.jpg"))); // NOI18N
 
         panelRedondo2.setBackground(new java.awt.Color(212, 198, 231));
         panelRedondo2.setRedondeoInferiorLeft(10);
@@ -50,27 +54,12 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         panelRedondo1.setRedondeoRight(10);
         panelRedondo1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jEImagePanel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos_Imagenes/home.png"))); // NOI18N
-
-        javax.swing.GroupLayout jEImagePanel3Layout = new javax.swing.GroupLayout(jEImagePanel3);
-        jEImagePanel3.setLayout(jEImagePanel3Layout);
-        jEImagePanel3Layout.setHorizontalGroup(
-            jEImagePanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-        jEImagePanel3Layout.setVerticalGroup(
-            jEImagePanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-
-        panelRedondo1.add(jEImagePanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 20, 20));
-
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Home");
         panelRedondo1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 50, 20));
 
-        jEImagePanel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos_Imagenes/home.png"))); // NOI18N
+        jEImagePanel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home.png"))); // NOI18N
 
         javax.swing.GroupLayout jEImagePanel4Layout = new javax.swing.GroupLayout(jEImagePanel4);
         jEImagePanel4.setLayout(jEImagePanel4Layout);
@@ -106,13 +95,13 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Bienvenido al Compilador de Programas de C++ precione en el botón para inciar");
-        jPanelTransparente2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 510, -1));
+        jPanelTransparente2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 510, -1));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Bienvenido al Sistema");
-        jPanelTransparente2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 510, -1));
+        jPanelTransparente2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 510, -1));
 
         botonPrincipal1.setForeground(new java.awt.Color(255, 255, 255));
         botonPrincipal1.setText("Iniciar");
@@ -127,7 +116,22 @@ public class ventanaPrincipal extends javax.swing.JFrame {
                 botonPrincipal1ActionPerformed(evt);
             }
         });
-        jPanelTransparente2.add(botonPrincipal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 90, 30));
+        jPanelTransparente2.add(botonPrincipal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 90, 30));
+
+        jEImagePanel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logo.png"))); // NOI18N
+
+        javax.swing.GroupLayout jEImagePanel2Layout = new javax.swing.GroupLayout(jEImagePanel2);
+        jEImagePanel2.setLayout(jEImagePanel2Layout);
+        jEImagePanel2Layout.setHorizontalGroup(
+            jEImagePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        jEImagePanel2Layout.setVerticalGroup(
+            jEImagePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+        );
+
+        jPanelTransparente2.add(jEImagePanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 200, 190));
 
         javax.swing.GroupLayout jEImagePanel1Layout = new javax.swing.GroupLayout(jEImagePanel1);
         jEImagePanel1.setLayout(jEImagePanel1Layout);
@@ -210,7 +214,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     private Componentes_Programa.botonPrincipal botonPrincipal1;
     private Componentes_Programa.botonesVentana botonesV;
     private LIB.JEImagePanel jEImagePanel1;
-    private LIB.JEImagePanel jEImagePanel3;
+    private LIB.JEImagePanel jEImagePanel2;
     private LIB.JEImagePanel jEImagePanel4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

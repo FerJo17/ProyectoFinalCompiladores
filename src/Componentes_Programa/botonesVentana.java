@@ -32,7 +32,7 @@ public class botonesVentana extends javax.swing.JPanel {
         maximizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if (ventana.getExtendedState() == JFrame.MAXIMIZED_BOTH) {
+               if (ventana.getExtendedState() == JFrame.MAXIMIZED_BOTH) {
                     ventana.setExtendedState(JFrame.NORMAL);
                 } else {
                     ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
