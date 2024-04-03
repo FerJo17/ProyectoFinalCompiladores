@@ -14,7 +14,6 @@ public class ventanaCargaDeCodigo extends javax.swing.JFrame {
         botonesV.initEvent(ventanaCargaDeCodigo.this);
         mouseCursor mouse = new mouseCursor();
         cargarArchivo.addMouseListener(mouse);
-
     }
     
     
@@ -40,7 +39,7 @@ public class ventanaCargaDeCodigo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        botonPrincipal1 = new Componentes_Programa.botonPrincipal();
+        analizar = new Componentes_Programa.botonPrincipal();
         cargarArchivo = new LIB.JEImagePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -176,17 +175,17 @@ public class ventanaCargaDeCodigo extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("no es de este lenguaje de programación no funcionará la compilación");
 
-        botonPrincipal1.setForeground(new java.awt.Color(255, 255, 255));
-        botonPrincipal1.setText("Analizar");
-        botonPrincipal1.setBorderColor(new java.awt.Color(23, 122, 228));
-        botonPrincipal1.setColor(new java.awt.Color(23, 122, 228));
-        botonPrincipal1.setColorClick(new java.awt.Color(31, 39, 100));
-        botonPrincipal1.setColorOver(new java.awt.Color(23, 122, 228));
-        botonPrincipal1.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        botonPrincipal1.setRadius(10);
-        botonPrincipal1.addActionListener(new java.awt.event.ActionListener() {
+        analizar.setForeground(new java.awt.Color(255, 255, 255));
+        analizar.setText("Analizar");
+        analizar.setBorderColor(new java.awt.Color(23, 122, 228));
+        analizar.setColor(new java.awt.Color(23, 122, 228));
+        analizar.setColorClick(new java.awt.Color(31, 39, 100));
+        analizar.setColorOver(new java.awt.Color(23, 122, 228));
+        analizar.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        analizar.setRadius(10);
+        analizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonPrincipal1ActionPerformed(evt);
+                analizarActionPerformed(evt);
             }
         });
 
@@ -227,7 +226,7 @@ public class ventanaCargaDeCodigo extends javax.swing.JFrame {
                             .addComponent(jLabel7)))
                     .addGroup(panelRedondo3Layout.createSequentialGroup()
                         .addGap(238, 238, 238)
-                        .addComponent(botonPrincipal1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(analizar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
         panelRedondo3Layout.setVerticalGroup(
@@ -242,7 +241,7 @@ public class ventanaCargaDeCodigo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cargarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(botonPrincipal1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(analizar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
@@ -255,7 +254,7 @@ public class ventanaCargaDeCodigo extends javax.swing.JFrame {
                 .addComponent(panelRedondo2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(panelRedondo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
         jEImagePanel1Layout.setVerticalGroup(
             jEImagePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,22 +281,20 @@ public class ventanaCargaDeCodigo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    boolean accion;
-    private void botonPrincipal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPrincipal1ActionPerformed
-    if(accion){
-        System.out.println("Hola");
-    } else{
-        System.out.println("Error!!");
-    }
-    }//GEN-LAST:event_botonPrincipal1ActionPerformed
+    private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
+    ventananAnalisisDeCodigo ver = new ventananAnalisisDeCodigo();
+    ver.setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_analizarActionPerformed
 
     private void cargarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarArchivoMouseClicked
     //Instanciar el Objeto para seleccionar el archivo
-    JnaFileChooser ch = new JnaFileChooser();
+        JnaFileChooser ch = new JnaFileChooser();
     //Colocar Filtro para que solo permita txt
     FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
     ch.addFilter("Text Files", "txt");  
-    accion = ch.showOpenDialog(this);
+    boolean accion = ch.showOpenDialog(this);
+    //Aqui meter todo lo de expresiones regulares
     }//GEN-LAST:event_cargarArchivoMouseClicked
 
     /**
@@ -339,7 +336,7 @@ public class ventanaCargaDeCodigo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Componentes_Programa.botonPrincipal botonPrincipal1;
+    private Componentes_Programa.botonPrincipal analizar;
     private Componentes_Programa.botonesVentana botonesV;
     private LIB.JEImagePanel cargarArchivo;
     private LIB.JEImagePanel jEImagePanel1;
