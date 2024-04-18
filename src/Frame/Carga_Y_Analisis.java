@@ -425,7 +425,8 @@ public class Carga_Y_Analisis extends javax.swing.JFrame {
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void cargarBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarBDActionPerformed
-    tablaSimbolos.setEnabled(true);    
+    tablaSimbolos.setEnabled(true);   
+    funcion.cargarDatosBase(tabla);
     }//GEN-LAST:event_cargarBDActionPerformed
 
     private void tablaSimbolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablaSimbolosActionPerformed

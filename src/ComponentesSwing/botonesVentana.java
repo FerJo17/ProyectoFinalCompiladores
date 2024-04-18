@@ -1,12 +1,15 @@
 
 package ComponentesSwing;
 
+import Clases.Funciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class botonesVentana extends javax.swing.JPanel {
+    
+    Funciones funcion = new Funciones();
 
     public botonesVentana() {
         initComponents();
@@ -18,6 +21,7 @@ public class botonesVentana extends javax.swing.JPanel {
         cerrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                funcion.borradoTablaSimbolos();
                 System.exit(0);
             }
         });
