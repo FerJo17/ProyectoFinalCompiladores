@@ -11,7 +11,7 @@ public class ConexionMYSQL {
 
     public static final String URL = "jdbc:mysql://localhost:3306/?useTimezone=true&serverTimezone=UTC";
     public static final String USERNAME = "root";
-    public static final String PASSWORD = "Ferjo2003*";
+    public static final String PASSWORD = "Jucemart55";
     public static final String NOMBRE_BASE_DE_DATOS = "proyectoFinal";
 
     public static Connection Conectarbase() {

@@ -1,6 +1,7 @@
 
 package Frame;
 import Clases.Funciones;
+import Clases.analisislex;
 import java.io.File;
 import jnafilechooser.api.JnaFileChooser;
 
@@ -398,11 +399,23 @@ public class Carga_Y_Analisis extends javax.swing.JFrame {
     
     private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
     //Aqui meter todo lo de expresiones regulares
-    if(accion){
-        File archivo = ch.getSelectedFile();
-        funcion.cargarDatos(tabla, archivo);
-        cargarBD.setEnabled(true);
-    } 
+    
+  if (accion) {
+    File archivo = ch.getSelectedFile();
+    funcion.cargarDatos(tabla, archivo);
+
+    // Crear una instancia de la clase analisislex
+    analisislex analizador = new analisislex();
+
+    // Llamar al método analizarCodigo para realizar el análisis léxico
+    analizador.analizarCodigo(archivo, tabla, jTextArea1);
+
+    // Habilitar el botón para cargar en la base de datos
+    cargarBD.setEnabled(true);
+}
+
+    
+    
     }//GEN-LAST:event_analizarActionPerformed
 
     private void cargarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarArchivoMouseClicked
