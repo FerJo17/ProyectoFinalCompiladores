@@ -4,10 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
@@ -21,40 +19,55 @@ public class analisislex {
             String linea;
             int numeroLinea = 0;
 
-            // Patrón para identificar comentarios de línea
-            Pattern comentarioPattern = Pattern.compile("^\\s*//");
-
-            // Patrón para identificar lexemas
-            String patron = "(\\b\\w+\\b|\\S)";
-
             while ((linea = br.readLine()) != null) {
                 numeroLinea++;
-                Matcher comentarioMatcher = comentarioPattern.matcher(linea);
-                if (comentarioMatcher.find()) {
-                    // Si la línea comienza con "//", mostrarla en el JTextArea de comentarios
-                    areaComentarios.append(linea + "\n");
-                } else {
-                    // Si no, analizar el lexema y agregarlo a la JTable como antes
-                    analizarLinea(linea, modelo, patron);
-                }
+                // Analizar la línea completa, incluyendo posibles comentarios
+                analizarLinea(linea, modelo, areaComentarios);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void analizarLinea(String linea, DefaultTableModel modelo, String patron) {
-        // Compilar el patrón de expresión regular
-        Pattern pattern = Pattern.compile(patron);
+    private static void analizarLinea(String linea, DefaultTableModel modelo, JTextArea areaComentarios) {
+        // Expresión regular para identificar lexemas, cadenas completas y comentarios
+        String patron = "\"([^\"]*)\"|\\'([^\\']*)\\'|//.*|\\t|\\s|\\(|\\)|\\{|\\}|\\[|\\]|,|;|:|\\+|\\-|\\*|/|%|=|&|\\||!|<|>|#|\\^|~";
 
-        // Matcher para encontrar los lexemas en la línea
+        // Crear el patrón y el matcher
+        Pattern pattern = Pattern.compile(patron);
         Matcher matcher = pattern.matcher(linea);
 
-        // Iterar sobre los lexemas y agregarlos al modelo de la tabla
+        // Iterar sobre los lexemas encontrados por el matcher
+        int start = 0;
         while (matcher.find()) {
+            // Capturar el texto antes del patrón encontrado
+            if (start < matcher.start()) {
+                String lexema = linea.substring(start, matcher.start()).trim();
+                if (!lexema.isEmpty()) {
+                    String categoria = obtenerCategoriaLexica2(lexema);
+                    modelo.addRow(new Object[]{lexema, categoria});
+                }
+            }
+
+            // Capturar el patrón encontrado como lexema
             String lexema = matcher.group().trim();
-            if (!lexema.isEmpty()) { // Ignorar lexemas vacíos
-                String categoria = obtenerCategoriaLexica(lexema);
+            if (!lexema.isEmpty()) {
+                // Si es un comentario, agregarlo al JTextArea
+                if (lexema.startsWith("//")) {
+                    areaComentarios.append(lexema + "\n");
+                } else {
+                    String categoria = obtenerCategoriaLexica2(lexema);
+                    modelo.addRow(new Object[]{lexema, categoria});
+                }
+            }
+            start = matcher.end();
+        }
+
+        // Capturar el último lexema si hay alguno después del último delimitador
+        if (start < linea.length()) {
+            String lexema = linea.substring(start).trim();
+            if (!lexema.isEmpty()) {
+                String categoria = obtenerCategoriaLexica2(lexema);
                 modelo.addRow(new Object[]{lexema, categoria});
             }
         }
@@ -73,6 +86,24 @@ public class analisislex {
             return "500"; // Constante de Carácter o Cadena
         } else if (esSimboloEspecial(lexema)) {
             return "600"; // Símbolo Especial
+        } else {
+            return ""; // No se reconoce como ninguna categoría léxica específica
+        }
+    }
+    
+    private static String obtenerCategoriaLexica2(String lexema) {
+        if (esPalabraClave(lexema)) {
+            return "Palabra Clave"; // Palabra Clave
+        } else if (esIdentificador(lexema)) {
+            return "Identificado"; // Identificador
+        } else if (esOperador(lexema)) {
+            return "Operador"; // Operador
+        } else if (esConstanteNumerica(lexema)) {
+            return "Constante Numérica"; // Constante Numérica
+        } else if (esConstanteCaracterCadena(lexema)) {
+            return "Constante de carácter o cadena"; // Constante de Carácter o Cadena
+        } else if (esSimboloEspecial(lexema)) {
+            return "Símbolos Especiales"; // Símbolo Especial
         } else {
             return ""; // No se reconoce como ninguna categoría léxica específica
         }
@@ -139,9 +170,7 @@ public class analisislex {
 
     private static boolean esConstanteCaracterCadena(String lexema) {
         // Verificar si el lexema comienza y termina con comillas simples o dobles
-        if ((
-
-lexema.startsWith("'") && lexema.endsWith("'")) || (lexema.startsWith("\"") && lexema.endsWith("\""))) {
+        if ((lexema.startsWith("'") && lexema.endsWith("'")) || (lexema.startsWith("\"") && lexema.endsWith("\""))) {
             // Verificar si el lexema tiene al menos dos caracteres (uno para la comilla inicial y otro para la final)
             if (lexema.length() >= 2) {
                 return true;
