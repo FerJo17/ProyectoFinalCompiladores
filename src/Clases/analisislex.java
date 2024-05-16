@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
@@ -17,14 +21,21 @@ public class analisislex {
             String linea;
             int numeroLinea = 0;
 
+            // Patrón para identificar comentarios de línea
+            Pattern comentarioPattern = Pattern.compile("^\\s*//");
+
+            // Patrón para identificar lexemas
+            String patron = "(\\b\\w+\\b|\\S)";
+
             while ((linea = br.readLine()) != null) {
                 numeroLinea++;
-                if (linea.trim().startsWith("//")) {
+                Matcher comentarioMatcher = comentarioPattern.matcher(linea);
+                if (comentarioMatcher.find()) {
                     // Si la línea comienza con "//", mostrarla en el JTextArea de comentarios
                     areaComentarios.append(linea + "\n");
                 } else {
                     // Si no, analizar el lexema y agregarlo a la JTable como antes
-                    analizarLinea(linea, modelo);
+                    analizarLinea(linea, modelo, patron);
                 }
             }
         } catch (IOException e) {
@@ -32,25 +43,22 @@ public class analisislex {
         }
     }
 
-private static void analizarLinea(String linea, DefaultTableModel modelo) {
-    // Expresión regular para dividir la línea en lexemas
-   String patron = "([\\s\\t]+|\\(|\\)|\\{|\\}|\\[|\\]|(?:'[^']*'|\"\\s*[^\"]*\\s*\")|,|;|:|\\+|\\-|\\*|/|%|=|&|\\||!|<|>|#|\\^|~)";
+    private static void analizarLinea(String linea, DefaultTableModel modelo, String patron) {
+        // Compilar el patrón de expresión regular
+        Pattern pattern = Pattern.compile(patron);
 
-    // Dividir la línea en lexemas utilizando la expresión regular
-    String[] lexemas = linea.split("(?=" + patron + ")|(?<=" + patron + ")");
+        // Matcher para encontrar los lexemas en la línea
+        Matcher matcher = pattern.matcher(linea);
 
-    // Iterar sobre los lexemas y agregarlos al modelo de la tabla
-    for (String lexema : lexemas) {
-        // Eliminar espacios en blanco alrededor del lexema
-        lexema = lexema.trim();
-        if (!lexema.isEmpty()) { // Ignorar lexemas vacíos
-            String categoria = obtenerCategoriaLexica(lexema);
-            modelo.addRow(new Object[]{lexema, categoria});
+        // Iterar sobre los lexemas y agregarlos al modelo de la tabla
+        while (matcher.find()) {
+            String lexema = matcher.group().trim();
+            if (!lexema.isEmpty()) { // Ignorar lexemas vacíos
+                String categoria = obtenerCategoriaLexica(lexema);
+                modelo.addRow(new Object[]{lexema, categoria});
+            }
         }
     }
-}
-
-
 
     private static String obtenerCategoriaLexica(String lexema) {
         if (esPalabraClave(lexema)) {
@@ -70,7 +78,6 @@ private static void analizarLinea(String linea, DefaultTableModel modelo) {
         }
     }
 
-    // Implementa los métodos para verificar si un lexema pertenece a una categoría léxica específica
     private static boolean esPalabraClave(String lexema) {
         // Lista de palabras clave en Java
         String[] palabrasClave = {"abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const",
@@ -131,16 +138,17 @@ private static void analizarLinea(String linea, DefaultTableModel modelo) {
     }
 
     private static boolean esConstanteCaracterCadena(String lexema) {
-    // Verificar si el lexema comienza y termina con comillas simples o dobles
-    if ((lexema.startsWith("'") && lexema.endsWith("'")) || (lexema.startsWith("\"") && lexema.endsWith("\""))) {
-        // Verificar si el lexema tiene al menos dos caracteres (uno para la comilla inicial y otro para la final)
-        if (lexema.length() >= 2) {
-            return true;
-        }
-    }
-    return false;
-}
+        // Verificar si el lexema comienza y termina con comillas simples o dobles
+        if ((
 
+lexema.startsWith("'") && lexema.endsWith("'")) || (lexema.startsWith("\"") && lexema.endsWith("\""))) {
+            // Verificar si el lexema tiene al menos dos caracteres (uno para la comilla inicial y otro para la final)
+            if (lexema.length() >= 2) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private static boolean esSimboloEspecial(String lexema) {
         // Lista de símbolos especiales en C++
