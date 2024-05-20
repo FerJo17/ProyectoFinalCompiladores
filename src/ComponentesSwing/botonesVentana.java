@@ -21,7 +21,7 @@ public class botonesVentana extends javax.swing.JPanel {
         cerrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                funcion.borradoTablaSimbolos();
+                funcion.borradoTablas();
                 System.exit(0);
             }
         });

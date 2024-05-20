@@ -39,23 +39,23 @@ public class Funciones {
     public void limpiarTabla(JTable tabla){
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
         model.setRowCount(0);
-        borradoTablaSimbolos();
+        borradoTablas();
         
     }
    
     
-public void borradoTablaSimbolos(){
-        try{
-            con = Conectarbase();            
-            ps = con.prepareStatement("TRUNCATE TABLE tabla_simbolos; ");                   
-            ps.executeUpdate();           
-            con.close();
-            
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }         
-}
+    public void borradoTablas() {
+        try {
+            con = Conectarbase();
 
+            // Eliminar contenido de la tabla_simbolos
+            ps = con.prepareStatement("TRUNCATE TABLE tabla_simbolos;");
+            ps.executeUpdate();
+            ps.close();
 
-    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace();
+        } 
+    }  
 }
