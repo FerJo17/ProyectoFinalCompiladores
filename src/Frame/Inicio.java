@@ -169,7 +169,7 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonPrincipal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPrincipal1ActionPerformed
-    Carga_Y_Analisis ver = new Carga_Y_Analisis();
+    VentanaAnalisis ver = new VentanaAnalisis();
     ver.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_botonPrincipal1ActionPerformed

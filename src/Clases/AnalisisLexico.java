@@ -10,7 +10,9 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
-public class analisislex {
+
+public class AnalisisLexico {
+
     public static void analizarCodigo(File archivo, JTable tabla, JTextArea areaComentarios) {
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         areaComentarios.setText(""); // Limpiar el JTextArea antes de empezar
@@ -191,4 +193,5 @@ public class analisislex {
         }
         return false;
     }
-}
+   
+}    

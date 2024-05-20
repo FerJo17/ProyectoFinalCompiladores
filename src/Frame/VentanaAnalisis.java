@@ -1,11 +1,12 @@
 
 package Frame;
 import Clases.Funciones;
-import Clases.analisislex;
+import Clases.AnalisisLexico;
+import static Clases.ConexionMYSQL.Conectarbase;
 import java.io.File;
 import jnafilechooser.api.JnaFileChooser;
 
-public class Carga_Y_Analisis extends javax.swing.JFrame {
+public class VentanaAnalisis extends javax.swing.JFrame {
     
     ////Instanciar el Objetos
     JnaFileChooser ch = new JnaFileChooser();  
@@ -13,9 +14,9 @@ public class Carga_Y_Analisis extends javax.swing.JFrame {
       
     boolean accion; 
     
-    public Carga_Y_Analisis() {
+    public VentanaAnalisis() {
         initComponents();
-        botonesV.initEvent(Carga_Y_Analisis.this);
+        botonesV.initEvent(VentanaAnalisis.this);
         analizar.setEnabled(false);
         cargarArchivo.setEnabled(false);
         limpiar.setEnabled(false);
@@ -45,7 +46,7 @@ public class Carga_Y_Analisis extends javax.swing.JFrame {
         analizar = new ComponentesSwing.botonPrincipal();
         cargarArchivo = new LIB.JEImagePanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        comentarios = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -198,9 +199,9 @@ public class Carga_Y_Analisis extends javax.swing.JFrame {
             .addGap(0, 199, Short.MAX_VALUE)
         );
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        comentarios.setColumns(20);
+        comentarios.setRows(5);
+        jScrollPane1.setViewportView(comentarios);
 
         jLabel10.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
@@ -398,24 +399,20 @@ public class Carga_Y_Analisis extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
-    //Aqui meter todo lo de expresiones regulares
-    
+    //Aqui meter todo lo de expresiones regulares 
   if (accion) {
     File archivo = ch.getSelectedFile();
     funcion.cargarDatos(tabla, archivo);
 
     // Crear una instancia de la clase analisislex
-    analisislex analizador = new analisislex();
+    AnalisisLexico analizador = new AnalisisLexico();
 
     // Llamar al método analizarCodigo para realizar el análisis léxico
-    analizador.analizarCodigo(archivo, tabla, jTextArea1);
+    analizador.analizarCodigo(archivo, tabla, comentarios);
 
     // Habilitar el botón para cargar en la base de datos
     cargarBD.setEnabled(true);
-}
-
-    
-    
+} 
     }//GEN-LAST:event_analizarActionPerformed
 
     private void cargarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarArchivoMouseClicked
@@ -437,22 +434,22 @@ public class Carga_Y_Analisis extends javax.swing.JFrame {
     limpiar.setEnabled(false);
     cargarBD.setEnabled(false);
     tablaSimbolos.setEnabled(false);   
+    comentarios.setText("");
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void cargarBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarBDActionPerformed
     tablaSimbolos.setEnabled(true);   
-    funcion.cargarDatosBase(tabla);
     }//GEN-LAST:event_cargarBDActionPerformed
 
     private void tablaSimbolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablaSimbolosActionPerformed
-    funcion.visualizarTablaSimbolos();
+   
     }//GEN-LAST:event_tablaSimbolosActionPerformed
 
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Carga_Y_Analisis().setVisible(true);
+                new VentanaAnalisis().setVisible(true);
             }
         });
     }
@@ -462,6 +459,7 @@ public class Carga_Y_Analisis extends javax.swing.JFrame {
     private ComponentesSwing.botonesVentana botonesV;
     private LIB.JEImagePanel cargarArchivo;
     private ComponentesSwing.botonPrincipal cargarBD;
+    private javax.swing.JTextArea comentarios;
     private LIB.JEImagePanel jEImagePanel1;
     private LIB.JEImagePanel jEImagePanel4;
     private LIB.JEImagePanel jEImagePanel5;
@@ -479,7 +477,6 @@ public class Carga_Y_Analisis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
     private ComponentesSwing.botonPrincipal limpiar;
     private ComponentesSwing.panelRedondo panelRedondo1;
     private ComponentesSwing.panelRedondo panelRedondo2;
