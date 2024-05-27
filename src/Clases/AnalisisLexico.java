@@ -46,7 +46,7 @@ public class AnalisisLexico {
             if (start < matcher.start()) {
                 String lexema = linea.substring(start, matcher.start()).trim();
                 if (!lexema.isEmpty()) {
-                    String categoria = obtenerCategoriaLexica2(lexema);
+                    String categoria = obtenerCategoriaLexica(lexema);
                     modelo.addRow(new Object[]{lexema, categoria});
                 }
             }
@@ -58,7 +58,7 @@ public class AnalisisLexico {
                 if (lexema.startsWith("//")) {
                     areaComentarios.append(lexema + "\n");
                 } else {
-                    String categoria = obtenerCategoriaLexica2(lexema);
+                    String categoria = obtenerCategoriaLexica(lexema);
                     modelo.addRow(new Object[]{lexema, categoria});
                 }
             }
@@ -69,35 +69,24 @@ public class AnalisisLexico {
         if (start < linea.length()) {
             String lexema = linea.substring(start).trim();
             if (!lexema.isEmpty()) {
-                String categoria = obtenerCategoriaLexica2(lexema);
+                String categoria = obtenerCategoriaLexica(lexema);
                 modelo.addRow(new Object[]{lexema, categoria});
             }
         }
     }
 
     private static String obtenerCategoriaLexica(String lexema) {
-        if (esPalabraClave(lexema)) {
-            return "100"; // Palabra Clave
+        String categoria = "";
+        Funciones funciones = new Funciones();  
+        
+        if (esPalabraClave(lexema)) {   
+            categoria = "Palabra Clave"; //Coloca que categoria es
+            funciones.cargaBaseDatos(lexema, categoria); //Se manda el lexema y la categoria
+            return "Palabra Clave"; // Palabra Clave         
         } else if (esIdentificador(lexema)) {
-            return "200"; // Identificador
-        } else if (esOperador(lexema)) {
-            return "300"; // Operador
-        } else if (esConstanteNumerica(lexema)) {
-            return "400"; // Constante Numérica
-        } else if (esConstanteCaracterCadena(lexema)) {
-            return "500"; // Constante de Carácter o Cadena
-        } else if (esSimboloEspecial(lexema)) {
-            return "600"; // Símbolo Especial
-        } else {
-            return ""; // No se reconoce como ninguna categoría léxica específica
-        }
-    }
-    
-    private static String obtenerCategoriaLexica2(String lexema) {
-        if (esPalabraClave(lexema)) {
-            return "Palabra Clave"; // Palabra Clave
-        } else if (esIdentificador(lexema)) {
-            return "Identificado"; // Identificador
+            categoria = "Identificador"; //Coloca que categoria es
+            funciones.cargaBaseDatos(lexema, categoria); //Se manda el lexema y la categoria            
+            return "Identificador"; // Identificador
         } else if (esOperador(lexema)) {
             return "Operador"; // Operador
         } else if (esConstanteNumerica(lexema)) {
@@ -107,16 +96,16 @@ public class AnalisisLexico {
         } else if (esSimboloEspecial(lexema)) {
             return "Símbolos Especiales"; // Símbolo Especial
         } else {
-            return ""; // No se reconoce como ninguna categoría léxica específica
+            return "Otros Lexemas"; // No se reconoce como ninguna categoría léxica específica
         }
     }
 
     private static boolean esPalabraClave(String lexema) {
         // Lista de palabras clave en Java
         String[] palabrasClave = {"abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const",
-                "continue", "default", "do", "double", "else", "enum", "extends", "final", "finally", "float", "for", "goto",
-                "if", "implements", "import", "instanceof", "int", "interface", "long", "native", "new", "null", "package",
-                "private", "protected", "public", "return", "short", "static", "strictfp", "super", "switch", "synchronized",
+                "continue", "cout","default", "do", "double", "else", "endl", "enum", "extends", "final", "finally", "float", "for", "goto",
+                "if", "implements", "import", "instanceof", "int", "interface", "include", "long", "native", "new", "null", "namespace", "package",
+                "private", "protected", "public", "return", "short", "static", "strictfp", "using", "super", "switch", "synchronized",
                 "this", "throw", "throws", "transient", "try", "void", "volatile", "while"};
 
         // Verificar si el lexema está en la lista de palabras clave

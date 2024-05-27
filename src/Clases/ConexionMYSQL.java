@@ -104,6 +104,29 @@ private static void crearTablaCategorias(Connection con) {
                 // Si la tabla no existe, crearla
                 String crearTablaSQL = "CREATE TABLE tabla_simbolos (Lexema varchar(100), Codigo_Categoria integer, Codigo integer, primary key(Codigo), foreign key(Codigo_Categoria) references tabla_categorias(Codigo));";
                 stmt.executeUpdate(crearTablaSQL);
+        String crearTriggerSQL = 
+            "CREATE OR REPLACE TRIGGER before_insert_tabla_simbolos " +
+            "BEFORE INSERT ON tabla_simbolos " +
+            "FOR EACH ROW " +
+            "BEGIN " +
+            "IF :NEW.Codigo_Categoria = 100 THEN " +
+            "SET :NEW.Codigo = (SELECT COALESCE(MAX(Codigo), 100) + 1 FROM tabla_simbolos WHERE Codigo BETWEEN 101 AND 200); " +
+            "ELSIF :NEW.Codigo_Categoria = 200 THEN " +
+            "SET :NEW.Codigo = (SELECT COALESCE(MAX(Codigo), 200) + 1 FROM tabla_simbolos WHERE Codigo BETWEEN 201 AND 300); " +
+            "ELSIF :NEW.Codigo_Categoria = 300 THEN " +
+            "SET :NEW.Codigo = (SELECT COALESCE(MAX(Codigo), 300) + 1 FROM tabla_simbolos WHERE Codigo BETWEEN 301 AND 400); " +
+            "ELSIF :NEW.Codigo_Categoria = 400 THEN " +
+            "SET :NEW.Codigo = (SELECT COALESCE(MAX(Codigo), 400) + 1 FROM tabla_simbolos WHERE Codigo BETWEEN 401 AND 500); " +
+            "ELSIF :NEW.Codigo_Categoria = 500 THEN " +
+            "SET :NEW.Codigo = (SELECT COALESCE(MAX(Codigo), 500) + 1 FROM tabla_simbolos WHERE Codigo BETWEEN 501 AND 600); " +
+            "ELSIF :NEW.Codigo_Categoria = 600 THEN " +
+            "SET :NEW.Codigo = (SELECT COALESCE(MAX(Codigo), 600) + 1 FROM tabla_simbolos WHERE Codigo BETWEEN 601 AND 700); " +
+            "END IF; " +
+            "END;";
+        
+        // Ejecutar la consulta para crear el trigger
+        stmt.executeUpdate(crearTriggerSQL);
+                                              
             } else {
             }
             stmt.close();

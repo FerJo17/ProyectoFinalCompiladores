@@ -44,6 +44,42 @@ public class Funciones {
     }
    
     
+    public void cargaBaseDatos(String lexema, String categoria){
+        String lexemaCodigo = "";
+        int codigoCategoria = 0;
+        
+        switch(categoria){
+            case "Palabra Clave":
+                    lexemaCodigo = lexema;
+                    codigoCategoria = 100;                 
+                    break;
+            case "Identificador":
+                    lexemaCodigo = lexema;
+                    codigoCategoria = 200; 
+                    break;    
+        }
+        
+        
+        try{
+            con=Conectarbase();
+            ps=con.prepareStatement("INSERT INTO tabla_simbolos (Lexema, Codigo_Categoria) VALUES (?, ?)");
+            ps.setString(1, lexemaCodigo);
+            ps.setInt(2, codigoCategoria);      
+            int res=ps.executeUpdate();
+            if(res>0){
+                System.out.println("Registro Agregado");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Error al Guardar");
+            }
+            con.close();
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }    
+        
+        
+    }
+    
     public void borradoTablas() {
         try {
             con = Conectarbase();
