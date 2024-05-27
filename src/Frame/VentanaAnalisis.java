@@ -20,7 +20,6 @@ public class VentanaAnalisis extends javax.swing.JFrame {
         analizar.setEnabled(false);
         cargarArchivo.setEnabled(false);
         limpiar.setEnabled(false);
-        cargarBD.setEnabled(false);
         tablaSimbolos.setEnabled(false);
     }
     
@@ -51,7 +50,6 @@ public class VentanaAnalisis extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         limpiar = new ComponentesSwing.botonPrincipal();
-        cargarBD = new ComponentesSwing.botonPrincipal();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -232,20 +230,6 @@ public class VentanaAnalisis extends javax.swing.JFrame {
             }
         });
 
-        cargarBD.setForeground(new java.awt.Color(255, 255, 255));
-        cargarBD.setText("Cargar en DB");
-        cargarBD.setBorderColor(new java.awt.Color(23, 122, 228));
-        cargarBD.setColor(new java.awt.Color(23, 122, 228));
-        cargarBD.setColorClick(new java.awt.Color(31, 39, 100));
-        cargarBD.setColorOver(new java.awt.Color(23, 122, 228));
-        cargarBD.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        cargarBD.setRadius(10);
-        cargarBD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cargarBDActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -322,10 +306,8 @@ public class VentanaAnalisis extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cargarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(tablaSimbolos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(122, 122, 122))))
+                        .addGap(190, 190, 190))))
         );
         panelRedondo3Layout.setVerticalGroup(
             panelRedondo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,7 +339,6 @@ public class VentanaAnalisis extends javax.swing.JFrame {
                 .addGroup(panelRedondo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(analizar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cargarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tablaSimbolos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
@@ -410,8 +391,6 @@ public class VentanaAnalisis extends javax.swing.JFrame {
     // Llamar al método analizarCodigo para realizar el análisis léxico
     analizador.analizarCodigo(archivo, tabla, comentarios);
 
-    // Habilitar el botón para cargar en la base de datos
-    cargarBD.setEnabled(true);
 } 
     }//GEN-LAST:event_analizarActionPerformed
 
@@ -432,14 +411,9 @@ public class VentanaAnalisis extends javax.swing.JFrame {
     analizar.setEnabled(false);
     cargarArchivo.setEnabled(false);
     limpiar.setEnabled(false);
-    cargarBD.setEnabled(false);
     tablaSimbolos.setEnabled(false);   
     comentarios.setText("");
     }//GEN-LAST:event_limpiarActionPerformed
-
-    private void cargarBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarBDActionPerformed
-    tablaSimbolos.setEnabled(true);   
-    }//GEN-LAST:event_cargarBDActionPerformed
 
     private void tablaSimbolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablaSimbolosActionPerformed
    
@@ -458,7 +432,6 @@ public class VentanaAnalisis extends javax.swing.JFrame {
     private ComponentesSwing.botonPrincipal analizar;
     private ComponentesSwing.botonesVentana botonesV;
     private LIB.JEImagePanel cargarArchivo;
-    private ComponentesSwing.botonPrincipal cargarBD;
     private javax.swing.JTextArea comentarios;
     private LIB.JEImagePanel jEImagePanel1;
     private LIB.JEImagePanel jEImagePanel4;

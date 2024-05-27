@@ -56,37 +56,70 @@ public class Funciones {
             case "Identificador":
                     lexemaCodigo = lexema;
                     codigoCategoria = 200; 
-                    break;    
+                    break;   
+            case "Operador":
+                    lexemaCodigo = lexema;
+                    codigoCategoria = 300; 
+                    break; 
+            case "Constante":
+                    lexemaCodigo = lexema;
+                    codigoCategoria = 400; 
+                    break;                     
+            case "Cadena o Caracter":
+                    lexemaCodigo = lexema;
+                    codigoCategoria = 500; 
+                    break; 
+            case "Simbolo Especial":
+                    lexemaCodigo = lexema;
+                    codigoCategoria = 600; 
+                    break;                        
+            case "Otros":
+                    lexemaCodigo = lexema;
+                    codigoCategoria = 700; 
+                    break;                              
         }
         
-        
-        try{
-            con=Conectarbase();
-            ps=con.prepareStatement("INSERT INTO tabla_simbolos (Lexema, Codigo_Categoria) VALUES (?, ?)");
-            ps.setString(1, lexemaCodigo);
-            ps.setInt(2, codigoCategoria);      
-            int res=ps.executeUpdate();
-            if(res>0){
-                System.out.println("Registro Agregado");
+    try (Connection con = Conectarbase();
+         PreparedStatement pstmt = con.prepareStatement("SELECT 1 FROM tabla_simbolos WHERE Lexema = ?")) {
+        pstmt.setString(1, lexemaCodigo);
+        try (ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                System.out.println("El lexema ya existe en la tabla de símbolos.");
+                return; // Salir del método si el lexema ya existe
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Error al Guardar");
-            }
-            con.close();
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }    
-        
-        
+        }
+    } catch (Exception e) {
+        System.out.println("Error al verificar el lexema en la tabla de símbolos: " + e.getMessage());
+        return;
     }
+
+    // Si el lexema no existe, proceder con la inserción
+    try (Connection con = Conectarbase();
+         PreparedStatement pstmt = con.prepareStatement("INSERT INTO tabla_simbolos (Lexema, Codigo_Categoria) VALUES (?, ?)")) {
+        pstmt.setString(1, lexemaCodigo);
+        pstmt.setInt(2, codigoCategoria);
+        int filasInsertadas = pstmt.executeUpdate();
+        if (filasInsertadas > 0) {
+            System.out.println("Lexema insertado correctamente en la tabla de símbolos.");
+        } else {
+            System.out.println("No se pudo insertar el lexema en la tabla de símbolos.");
+        }
+    } catch (Exception e) {
+        System.out.println("Error al insertar el lexema en la tabla de símbolos: " + e.getMessage());
+    }
+               
+        
+}
     
     public void borradoTablas() {
         try {
             con = Conectarbase();
 
-            // Eliminar contenido de la tabla_simbolos
+            // Eliminar contenido de la tabla_simbolos y trigger para evitar problemas
             ps = con.prepareStatement("TRUNCATE TABLE tabla_simbolos;");
             ps.executeUpdate();
+            ps = con.prepareStatement("DROP TRIGGER IF EXISTS codigo_tabla_simbolos;");
+            ps.execute();
             ps.close();
 
         } catch (Exception e) {

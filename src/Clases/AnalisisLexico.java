@@ -88,21 +88,31 @@ public class AnalisisLexico {
             funciones.cargaBaseDatos(lexema, categoria); //Se manda el lexema y la categoria            
             return "Identificador"; // Identificador
         } else if (esOperador(lexema)) {
+            categoria = "Operador"; //Coloca que categoria es
+            funciones.cargaBaseDatos(lexema, categoria); //Se manda el lexema y la categoria                              
             return "Operador"; // Operador
         } else if (esConstanteNumerica(lexema)) {
+            categoria = "Constante"; //Coloca que categoria es
+            funciones.cargaBaseDatos(lexema, categoria); //Se manda el lexema y la categoria                   
             return "Constante Numérica"; // Constante Numérica
         } else if (esConstanteCaracterCadena(lexema)) {
+            categoria = "Cadena o Caracter"; //Coloca que categoria es
+            funciones.cargaBaseDatos(lexema, categoria); //Se manda el lexema y la categoria                   
             return "Constante de carácter o cadena"; // Constante de Carácter o Cadena
         } else if (esSimboloEspecial(lexema)) {
+            categoria = "Simbolo Especial"; //Coloca que categoria es
+            funciones.cargaBaseDatos(lexema, categoria); //Se manda el lexema y la categoria                   
             return "Símbolos Especiales"; // Símbolo Especial
         } else {
+            categoria = "Otros"; //Coloca que categoria es
+            funciones.cargaBaseDatos(lexema, categoria); //Se manda el lexema y la categoria       
             return "Otros Lexemas"; // No se reconoce como ninguna categoría léxica específica
         }
     }
 
     private static boolean esPalabraClave(String lexema) {
         // Lista de palabras clave en Java
-        String[] palabrasClave = {"abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const",
+        String[] palabrasClave = {"abstract", "assert", "boolean", "break", "byte", "case", "catch", "cin","char", "class", "const",
                 "continue", "cout","default", "do", "double", "else", "endl", "enum", "extends", "final", "finally", "float", "for", "goto",
                 "if", "implements", "import", "instanceof", "int", "interface", "include", "long", "native", "new", "null", "namespace", "package",
                 "private", "protected", "public", "return", "short", "static", "strictfp", "using", "super", "switch", "synchronized",
