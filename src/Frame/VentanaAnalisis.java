@@ -16,6 +16,7 @@ public class VentanaAnalisis extends javax.swing.JFrame {
     
     public VentanaAnalisis() {
         initComponents();
+        funcion.limpiarTabla(tabla);
         botonesV.initEvent(VentanaAnalisis.this);
         analizar.setEnabled(false);
         cargarArchivo.setEnabled(false);
@@ -130,11 +131,11 @@ public class VentanaAnalisis extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel9.setText("Base de Datos");
+        jLabel9.setText("Tabla de Símbolos");
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelRedondo2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 137, 150, 20));
 
-        jEImagePanel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/database.png"))); // NOI18N
+        jEImagePanel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/tabla.png"))); // NOI18N
 
         javax.swing.GroupLayout jEImagePanel7Layout = new javax.swing.GroupLayout(jEImagePanel7);
         jEImagePanel7.setLayout(jEImagePanel7Layout);
@@ -390,6 +391,7 @@ public class VentanaAnalisis extends javax.swing.JFrame {
 
     // Llamar al método analizarCodigo para realizar el análisis léxico
     analizador.analizarCodigo(archivo, tabla, comentarios);
+    tablaSimbolos.setEnabled(true);
 
 } 
     }//GEN-LAST:event_analizarActionPerformed
@@ -416,7 +418,9 @@ public class VentanaAnalisis extends javax.swing.JFrame {
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void tablaSimbolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablaSimbolosActionPerformed
-   
+    VentanaTablaSimbolos ver = new VentanaTablaSimbolos();
+    ver.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_tablaSimbolosActionPerformed
 
     public static void main(String args[]) {

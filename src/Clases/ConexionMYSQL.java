@@ -14,7 +14,7 @@ public class ConexionMYSQL {
 
     public static final String URL = "jdbc:mysql://localhost:3306/?useTimezone=true&serverTimezone=UTC";
     public static final String USERNAME = "root";
-    public static final String PASSWORD = "Ferjo2003*";
+    public static final String PASSWORD = "sierraF017";
     public static final String NOMBRE_BASE_DE_DATOS = "proyectoFinal";
 
     public static Connection Conectarbase() {
@@ -79,7 +79,8 @@ private static void crearTablaCategorias(Connection con) {
                             + "(300, 'Operadores'), "
                             + "(400, 'Constantes numéricas'), "
                             + "(500, 'Constantes de carácter o cadena'), "
-                            + "(600, 'Símbolos especiales');";
+                            + "(600, 'Símbolos especiales'),"
+                            + "(700, 'Otros Lexemas');";
                     stmt.executeUpdate(insertarDatosSQL);
                     System.out.println("Datos insertados correctamente.");
                 }

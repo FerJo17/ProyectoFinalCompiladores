@@ -105,7 +105,8 @@ public class AnalisisLexico {
             return "Símbolos Especiales"; // Símbolo Especial
         } else {
             categoria = "Otros"; //Coloca que categoria es
-            funciones.cargaBaseDatos(lexema, categoria); //Se manda el lexema y la categoria       
+            funciones.cargaBaseDatos(lexema, categoria); //Se manda el lexema y la categoria  
+            System.out.println(lexema);
             return "Otros Lexemas"; // No se reconoce como ninguna categoría léxica específica
         }
     }
