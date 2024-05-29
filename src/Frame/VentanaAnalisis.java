@@ -8,11 +8,13 @@ import jnafilechooser.api.JnaFileChooser;
 
 public class VentanaAnalisis extends javax.swing.JFrame {
     
+    
     ////Instanciar el Objetos
     JnaFileChooser ch = new JnaFileChooser();  
     Funciones funcion = new Funciones();
       
     boolean accion; 
+    
     
     public VentanaAnalisis() {
         initComponents();
@@ -22,6 +24,7 @@ public class VentanaAnalisis extends javax.swing.JFrame {
         cargarArchivo.setEnabled(false);
         limpiar.setEnabled(false);
         tablaSimbolos.setEnabled(false);
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -399,7 +402,8 @@ public class VentanaAnalisis extends javax.swing.JFrame {
     private void cargarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarArchivoMouseClicked
     
     //Colocar Filtro para que solo permita txt
-    ch.addFilter("Text Files", "txt");
+    ch.addFilter("Archivo .txt, .cpp", "txt", "cpp");
+
     accion = ch.showOpenDialog(this);
     
     //Habilitar Botones

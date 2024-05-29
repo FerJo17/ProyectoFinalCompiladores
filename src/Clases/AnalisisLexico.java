@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.JOptionPane;
 
 public class AnalisisLexico {
 
@@ -17,6 +17,15 @@ public class AnalisisLexico {
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         areaComentarios.setText(""); // Limpiar el JTextArea antes de empezar
 
+        // Verificar si el archivo es un programa en C++
+        if (!esProgramaCPlusPlus(archivo)) {
+            JOptionPane.showMessageDialog(null, "El archivo cargado no corresponde a un programa en C++", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Terminar la ejecución del método si no es un archivo válido
+        }
+
+         if (archivo == null || archivo.length() == 0) {
+        JOptionPane.showMessageDialog(null, "No hay ningún archivo cargado", "Error", JOptionPane.ERROR_MESSAGE);
+         }
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
             int numeroLinea = 0;
@@ -29,6 +38,21 @@ public class AnalisisLexico {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static boolean esProgramaCPlusPlus(File archivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                // Verificar si la línea contiene patrones típicos de C++
+                if (linea.contains("#include") || linea.contains(";")) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private static void analizarLinea(String linea, DefaultTableModel modelo, JTextArea areaComentarios) {
@@ -112,7 +136,7 @@ public class AnalisisLexico {
     }
 
     private static boolean esPalabraClave(String lexema) {
-        // Lista de palabras clave en Java
+        // Lista de palabras clave en Java y C++
         String[] palabrasClave = {"abstract", "assert", "boolean", "break", "byte", "case", "catch", "cin","char", "class", "const",
                 "continue", "cout","default", "do", "double", "else", "endl", "enum", "extends", "final", "finally", "float", "for", "goto",
                 "if", "implements", "import", "instanceof", "int", "interface", "include", "long", "native", "new", "null", "namespace", "package",
@@ -147,7 +171,7 @@ public class AnalisisLexico {
     }
 
     private static boolean esOperador(String lexema) {
-        // Lista de operadores en Java
+        // Lista de operadores en Java y C++
         String[] operadores = {"+", "-", "*", "/", "%", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!", "&", "|", "^", "~", "<<", ">>", ">>>", "++", "--", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=", "&=", "|=", "^="};
 
         // Verificar si el lexema está en la lista de operadores
@@ -194,4 +218,4 @@ public class AnalisisLexico {
         return false;
     }
    
-}    
+}
