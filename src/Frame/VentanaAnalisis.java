@@ -412,12 +412,10 @@ public class VentanaAnalisis extends javax.swing.JFrame {
           AnalisisLexico analizador = new AnalisisLexico();
 
           // Llamar al método analizarCodigo para realizar el análisis léxico
-          analizador.analizarCodigo(archivo, tabla, comentarios);
-          tablaSimbolos.setEnabled(true);
-          limpiar.setEnabled(true);
-          } 
+            analizador.analizarCodigo(archivo, tabla, comentarios);
+          }
         
-        verCodigo.setEnabled(true);
+
     }//GEN-LAST:event_analizarActionPerformed
 
     private void cargarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarArchivoMouseClicked
@@ -483,12 +481,12 @@ public class VentanaAnalisis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private ComponentesSwing.botonPrincipal limpiar;
+    public static ComponentesSwing.botonPrincipal limpiar;
     private ComponentesSwing.panelRedondo panelRedondo1;
     private ComponentesSwing.panelRedondo panelRedondo2;
     private ComponentesSwing.panelRedondo panelRedondo3;
     private javax.swing.JTable tabla;
-    private ComponentesSwing.botonPrincipal tablaSimbolos;
-    private ComponentesSwing.botonPrincipal verCodigo;
+    public static ComponentesSwing.botonPrincipal tablaSimbolos;
+    public static ComponentesSwing.botonPrincipal verCodigo;
     // End of variables declaration//GEN-END:variables
 }

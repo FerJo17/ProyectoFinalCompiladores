@@ -1,5 +1,8 @@
 package Clases;
 
+import static Frame.VentanaAnalisis.limpiar;
+import static Frame.VentanaAnalisis.tablaSimbolos;
+import static Frame.VentanaAnalisis.verCodigo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,6 +23,7 @@ public class AnalisisLexico {
         // Verificar si el archivo es un programa en C++
         if (!esProgramaCPlusPlus(archivo)) {
             JOptionPane.showMessageDialog(null, "El archivo cargado no corresponde a un programa en C++", "Error", JOptionPane.ERROR_MESSAGE);
+            
             return; // Terminar la ejecución del método si no es un archivo válido
         }
 
@@ -35,6 +39,12 @@ public class AnalisisLexico {
                 // Analizar la línea completa, incluyendo posibles comentarios
                 analizarLinea(linea, modelo, areaComentarios);
             }
+            
+            //Habilita los botones de la Ventana
+           tablaSimbolos.setEnabled(true);          
+           limpiar.setEnabled(true);
+           verCodigo.setEnabled(true);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
