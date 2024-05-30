@@ -289,21 +289,21 @@ public class VentanaTablaSimbolos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void visualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizarActionPerformed
-    Funciones funcion = new Funciones();
-    funcion.visualizarDatos(tablaSimbolos);
-    visualizar.setEnabled(false);
+        Funciones funcion = new Funciones();
+        funcion.visualizarDatos(tablaSimbolos);
+        visualizar.setEnabled(false);
     }//GEN-LAST:event_visualizarActionPerformed
 
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
-    VentanaAnalisis ver = new VentanaAnalisis();
-    ver.setVisible(true);
-    this.dispose();
-    visualizar.setEnabled(true);
+        VentanaAnalisis ver = new VentanaAnalisis();
+        ver.setVisible(true);
+        this.dispose();
+        visualizar.setEnabled(true);
     }//GEN-LAST:event_regresarActionPerformed
 
     private void categoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriasActionPerformed
-    Funciones funcion = new Funciones();
-    funcion.mostrarCategorias(this);
+        Funciones funcion = new Funciones();
+        funcion.mostrarCategorias(this);
     }//GEN-LAST:event_categoriasActionPerformed
 
     /**

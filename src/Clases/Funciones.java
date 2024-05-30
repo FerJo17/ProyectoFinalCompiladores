@@ -170,6 +170,30 @@ public class Funciones {
             e.printStackTrace();
         }
     }
+    
+    public void verCodigoAnalizar(File archivo, JFrame ventana){
+
+        StringBuilder contenidoArchivo = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                contenidoArchivo.append(linea).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejo de errores de lectura del archivo
+        }
+
+        // Crear un JTextArea para mostrar el contenido del archivo
+        JTextArea textArea = new JTextArea(contenidoArchivo.toString());
+        textArea.setEditable(false);
+
+        // Colocar el JTextArea dentro de un JScrollPane
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(600, 300));
+
+        // Mostrar el JScrollPane dentro de un JOptionPane
+        JOptionPane.showMessageDialog(ventana, scrollPane, "Contenido del Archivo", JOptionPane.PLAIN_MESSAGE);
+    }
 
     public void borradoTablas() {
         try {

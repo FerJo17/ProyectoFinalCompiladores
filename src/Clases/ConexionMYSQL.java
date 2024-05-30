@@ -29,7 +29,6 @@ public class ConexionMYSQL {
                 if (PASSWORD == null) {
                     PASSWORD = obtenerContraseña();
                 }
-
                 // Intentar establecer la conexión
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 con = DriverManager.getConnection(URL, USERNAME, PASSWORD);

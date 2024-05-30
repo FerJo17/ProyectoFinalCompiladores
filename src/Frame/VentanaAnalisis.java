@@ -12,7 +12,7 @@ public class VentanaAnalisis extends javax.swing.JFrame {
     ////Instanciar el Objetos
     JnaFileChooser ch = new JnaFileChooser();  
     Funciones funcion = new Funciones();
-      
+    File archivo;
     boolean accion; 
     
     
@@ -22,8 +22,10 @@ public class VentanaAnalisis extends javax.swing.JFrame {
         botonesV.initEvent(VentanaAnalisis.this);
         analizar.setEnabled(false);
         cargarArchivo.setEnabled(false);
-        limpiar.setEnabled(false);
+        verCodigo.setEnabled(false);
         tablaSimbolos.setEnabled(false);
+        verCodigo.setEnabled(false);
+        limpiar.setEnabled(false);
         
     }
     
@@ -53,11 +55,12 @@ public class VentanaAnalisis extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        limpiar = new ComponentesSwing.botonPrincipal();
+        verCodigo = new ComponentesSwing.botonPrincipal();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         tablaSimbolos = new ComponentesSwing.botonPrincipal();
+        limpiar = new ComponentesSwing.botonPrincipal();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -220,17 +223,17 @@ public class VentanaAnalisis extends javax.swing.JFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Componentes Léxicos");
 
-        limpiar.setForeground(new java.awt.Color(255, 255, 255));
-        limpiar.setText("Limpiar");
-        limpiar.setBorderColor(new java.awt.Color(23, 122, 228));
-        limpiar.setColor(new java.awt.Color(23, 122, 228));
-        limpiar.setColorClick(new java.awt.Color(31, 39, 100));
-        limpiar.setColorOver(new java.awt.Color(23, 122, 228));
-        limpiar.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        limpiar.setRadius(10);
-        limpiar.addActionListener(new java.awt.event.ActionListener() {
+        verCodigo.setForeground(new java.awt.Color(255, 255, 255));
+        verCodigo.setText("Visualizar Código");
+        verCodigo.setBorderColor(new java.awt.Color(23, 122, 228));
+        verCodigo.setColor(new java.awt.Color(23, 122, 228));
+        verCodigo.setColorClick(new java.awt.Color(31, 39, 100));
+        verCodigo.setColorOver(new java.awt.Color(23, 122, 228));
+        verCodigo.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        verCodigo.setRadius(10);
+        verCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limpiarActionPerformed(evt);
+                verCodigoActionPerformed(evt);
             }
         });
 
@@ -265,6 +268,20 @@ public class VentanaAnalisis extends javax.swing.JFrame {
         tablaSimbolos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tablaSimbolosActionPerformed(evt);
+            }
+        });
+
+        limpiar.setForeground(new java.awt.Color(255, 255, 255));
+        limpiar.setText("Limpiar");
+        limpiar.setBorderColor(new java.awt.Color(23, 122, 228));
+        limpiar.setColor(new java.awt.Color(23, 122, 228));
+        limpiar.setColorClick(new java.awt.Color(31, 39, 100));
+        limpiar.setColorOver(new java.awt.Color(23, 122, 228));
+        limpiar.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        limpiar.setRadius(10);
+        limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarActionPerformed(evt);
             }
         });
 
@@ -308,10 +325,12 @@ public class VentanaAnalisis extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondo3Layout.createSequentialGroup()
                         .addComponent(analizar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(verCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tablaSimbolos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(190, 190, 190))))
+                        .addGap(124, 124, 124))))
         );
         panelRedondo3Layout.setVerticalGroup(
             panelRedondo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,8 +361,9 @@ public class VentanaAnalisis extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelRedondo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(analizar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tablaSimbolos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(verCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tablaSimbolos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
 
@@ -384,48 +404,53 @@ public class VentanaAnalisis extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
-    //Aqui meter todo lo de expresiones regulares 
-  if (accion) {
-    File archivo = ch.getSelectedFile();
-    funcion.cargarDatos(tabla, archivo);
+        if (accion) {
+          archivo = ch.getSelectedFile();
+          funcion.cargarDatos(tabla, archivo);
 
-    // Crear una instancia de la clase analisislex
-    AnalisisLexico analizador = new AnalisisLexico();
+          // Crear una instancia de la clase analisislex
+          AnalisisLexico analizador = new AnalisisLexico();
 
-    // Llamar al método analizarCodigo para realizar el análisis léxico
-    analizador.analizarCodigo(archivo, tabla, comentarios);
-    tablaSimbolos.setEnabled(true);
-
-} 
+          // Llamar al método analizarCodigo para realizar el análisis léxico
+          analizador.analizarCodigo(archivo, tabla, comentarios);
+          tablaSimbolos.setEnabled(true);
+          limpiar.setEnabled(true);
+          } 
+        
+        verCodigo.setEnabled(true);
     }//GEN-LAST:event_analizarActionPerformed
 
     private void cargarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarArchivoMouseClicked
-    
-    //Colocar Filtro para que solo permita txt
-    ch.addFilter("Archivo .txt, .cpp", "txt", "cpp");
+        //Colocar Filtro para que solo permita txt
+        ch.addFilter("Archivo .txt, .cpp", "txt", "cpp");
 
-    accion = ch.showOpenDialog(this);
-    
-    //Habilitar Botones
-    analizar.setEnabled(true);
-    cargarArchivo.setEnabled(true);
-    limpiar.setEnabled(true);
+        accion = ch.showOpenDialog(this);
+
+        //Habilitar Botones
+        analizar.setEnabled(true);
+        cargarArchivo.setEnabled(true);
     }//GEN-LAST:event_cargarArchivoMouseClicked
 
-    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
-    funcion.limpiarTabla(tabla);
-    analizar.setEnabled(false);
-    cargarArchivo.setEnabled(false);
-    limpiar.setEnabled(false);
-    tablaSimbolos.setEnabled(false);   
-    comentarios.setText("");
-    }//GEN-LAST:event_limpiarActionPerformed
+    private void verCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verCodigoActionPerformed
+        funcion.verCodigoAnalizar(archivo, this);
+    }//GEN-LAST:event_verCodigoActionPerformed
 
     private void tablaSimbolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablaSimbolosActionPerformed
-    VentanaTablaSimbolos ver = new VentanaTablaSimbolos();
-    ver.setVisible(true);
-    this.dispose();
+        VentanaTablaSimbolos ver = new VentanaTablaSimbolos();
+        ver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_tablaSimbolosActionPerformed
+
+    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
+        funcion.limpiarTabla(tabla);
+        analizar.setEnabled(false);
+        cargarArchivo.setEnabled(false);
+        verCodigo.setEnabled(false);
+        tablaSimbolos.setEnabled(false);  
+        verCodigo.setEnabled(false);
+        limpiar.setEnabled(false);
+        comentarios.setText("");
+    }//GEN-LAST:event_limpiarActionPerformed
 
     public static void main(String args[]) {
         
@@ -464,5 +489,6 @@ public class VentanaAnalisis extends javax.swing.JFrame {
     private ComponentesSwing.panelRedondo panelRedondo3;
     private javax.swing.JTable tabla;
     private ComponentesSwing.botonPrincipal tablaSimbolos;
+    private ComponentesSwing.botonPrincipal verCodigo;
     // End of variables declaration//GEN-END:variables
 }
